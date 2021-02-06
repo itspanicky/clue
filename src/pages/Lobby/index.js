@@ -1,7 +1,8 @@
 import React, { useEffect} from 'react'
+import './index.css'
 import { useParams } from 'react-router-dom'
 import db from '../../firebase'
-
+import ShareRoom from '../../components/ShareRoom'
 
 function Lobby() {
   const { roomCode } = useParams();
@@ -16,8 +17,14 @@ function Lobby() {
   }, [roomCode])
 
   return (
-    <div>
-      LOBBY
+    <div className='lobby'>
+      <p>WHO WHAT WHERE?</p>
+      <div className="lobby__shareSection">
+        <p>Play with Friends!</p>
+        <ShareRoom textFor='Link' textToCopy={document.URL} />
+        <ShareRoom textFor='Room Code' textToCopy={roomCode} />
+      </div>
+      {/* Waiting Room */}
     </div>
   )
 }

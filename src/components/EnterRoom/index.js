@@ -4,20 +4,26 @@ import { Button, TextField } from '@material-ui/core'
 import db from '../../firebase'
 import { nanoid } from 'nanoid'
 import { useHistory } from 'react-router-dom'
+import { useStateValue } from '../../StateProvider'
+import firebase from 'firebase'
 
 function EnterRoom() {
   const history = useHistory()
+  const [{ user }] = useStateValue();
 
   const [toggle, setToggle] = useState(false)
   const [roomCode, setRoomCode] = useState(null)
 
-  const createRoom = async () => {
+  const createRoom = () => {
     // create a new room with a randomized 5 length string room code and reroute to new room
     console.log('createRoom')
 
     const newRoomCode = nanoid(5).toUpperCase()
-    await db.collection('rooms').doc(newRoomCode).set({})
-    await history.push(`/${newRoomCode}/Lobby`)
+    db.collection('rooms').doc(newRoomCode).set({
+      host: user,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    history.push(`/${newRoomCode}/Lobby`)
   }
   
   const joinRoom = () => {

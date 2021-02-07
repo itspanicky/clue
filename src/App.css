@@ -2,6 +2,7 @@ body {
   --black: #131313;
   --white: #f8f8f8;
   --green: #228d54;
+  background: var(--white);
   font-family: 'Fira Mono', monospace;
   overflow: hidden;
 }

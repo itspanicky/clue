@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Grid, TextField } from '@material-ui/core'
+import { Fab, Grid, TextField } from '@material-ui/core'
+import { Check, Link } from '@material-ui/icons'
 import Clipboard from 'react-clipboard.js'
 
-function ShareRoom({ textFor, textToCopy }) {
+function ShareRoom({ link, roomCode }) {
   const [copyBtnClicked, setCopyBtnClicked] = useState(false)
-  console.log(textToCopy)
+
   useEffect(() => {
     let timeout
     if (copyBtnClicked) {
@@ -17,34 +18,45 @@ function ShareRoom({ textFor, textToCopy }) {
 
   return (
     <div className='shareRoom'>
-      <Grid container spacing={3} justify="center" alignItems="center">
-        <Grid item xs={2}>
-          <p>{textFor}:</p>
-        </Grid>
-        <Grid item xs={5}>
+
+      <Grid container spacing={1} justify="flex-end" alignItems="center">
+        <Grid item>
           <TextField
-            defaultValue={textToCopy}
-            fullWidth
-            InputProps={{ readOnly: true }}
+            variant='outlined'
+            size='small'
+            defaultValue={roomCode}
+            InputProps={{ readOnly: true, style: { width: '85px' } }}
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={1.75}>
+          <p>Code</p>
+        </Grid>
+        <Grid item xs={0.5}>
+          <p>| Room |</p>
+        </Grid>
+        <Grid item xs={1.75}>
+          <p>Link</p>
+        </Grid>
+        <Grid item xs={0.5}>
           <Clipboard
-            data-clipboard-text={textToCopy}
+            data-clipboard-text={link}
             style={{ border: "none", background: "none" }}
           >
-            <Button
-              variant="contained"
-              color="default"
+            <Fab 
+              size='small'
               style={
                 copyBtnClicked
                   ? { backgroundColor: '#228d54', color: '#fff' }
-                  : {}
+                  : { backgroundColor: '#f8f8f8'}
               }
               onClick={() => setCopyBtnClicked(true)}
-              >
-              {!copyBtnClicked ? 'Copy' : 'Copied'}
-          </Button>
+            >
+              {!copyBtnClicked ? (
+                <Link />
+              ) : (
+                <Check />
+              )}
+            </Fab>
           </Clipboard>
         </Grid>
       </Grid>

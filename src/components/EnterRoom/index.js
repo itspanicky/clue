@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { useStateValue } from '../../StateProvider'
 import firebase from 'firebase'
 
+// Create a new room or join an existing room
 function EnterRoom() {
   const history = useHistory()
   const [{ user }] = useStateValue();

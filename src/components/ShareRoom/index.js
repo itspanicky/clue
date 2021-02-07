@@ -3,10 +3,12 @@ import { Fab, Grid, TextField } from '@material-ui/core'
 import { Check, Link } from '@material-ui/icons'
 import Clipboard from 'react-clipboard.js'
 
+// Share room code or link with friends
 function ShareRoom({ link, roomCode }) {
   const [copyBtnClicked, setCopyBtnClicked] = useState(false)
 
   useEffect(() => {
+    // change style briefly when button is clicked
     let timeout
     if (copyBtnClicked) {
       timeout = setTimeout(() => {

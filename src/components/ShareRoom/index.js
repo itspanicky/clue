@@ -25,7 +25,7 @@ function ShareRoom({ link, roomCode }) {
             variant='outlined'
             size='small'
             defaultValue={roomCode}
-            InputProps={{ readOnly: true, style: { width: '85px' } }}
+            InputProps={{ readOnly: true, style: { width: '90px' } }}
           />
         </Grid>
         <Grid item xs={1.75}>

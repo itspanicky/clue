@@ -37,6 +37,7 @@ function EnterRoom() {
     // redirect to room if room exist
     db.collection('rooms').doc(roomCode)
       .get().then((doc) => {
+        debugger;
         if (doc.exists) {
           history.push(`/${roomCode}/Lobby`)
         } else {
@@ -54,7 +55,7 @@ function EnterRoom() {
         variant='filled' 
         size='small' 
         value={roomCode}
-        onChange={({ target: { value } }) => setRoomCode(value)}
+        onChange={({ target: { value } }) => setRoomCode(value.toUpperCase())}
         inputProps={{ 
           maxLength: 5, 
           style: { background: '#f8f8f8', textTransform: 'uppercase' } }}

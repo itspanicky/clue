@@ -11,7 +11,7 @@
 .enterRoom > .enterRoom__createButton {
   margin: 10px;
   text-transform: inherit !important;
-  background-color: #228d54 !important;
+  background-color: var(--green) !important;
   color: var(--white);
 }
 

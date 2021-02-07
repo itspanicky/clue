@@ -18,7 +18,6 @@ function Lobby() {
 
   return (
     <div className='lobby'>
-      <p>WHO WHAT WHERE?</p>
       <div className="lobby__shareSection">
         <p>Play with Friends!</p>
         <ShareRoom textFor='Link' textToCopy={document.URL} />

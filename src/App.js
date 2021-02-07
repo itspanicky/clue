@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
 import Lobby from './pages/Lobby'
+import Header from './components/Header'
 import { useStateValue } from './StateProvider'
 import { actionTypes } from './reducer'
 import { playerId } from './services/localStorage'
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <Router>
         <Switch>
           <Route path='/:roomCode/Lobby' component={Lobby} />
@@ -31,7 +33,7 @@ function App() {
         </Switch>
       </Router>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -46,7 +46,7 @@ function ShareRoom({ link, roomCode }) {
               size='small'
               style={
                 copyBtnClicked
-                  ? { backgroundColor: '#228d54', color: '#fff' }
+                  ? { backgroundColor: '#131313', color: '#f8f8f8' }
                   : { backgroundColor: '#f8f8f8'}
               }
               onClick={() => setCopyBtnClicked(true)}

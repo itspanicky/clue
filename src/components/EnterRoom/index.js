@@ -21,7 +21,8 @@ function EnterRoom() {
     const newRoomCode = nanoid(5).toUpperCase()
     db.collection('rooms').doc(newRoomCode).set({
       host: user,
-      players: [],
+      players: [],  // { playerId, playerName, role }
+      status: 'waiting',  // waiting, playing
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     history.push(`/${newRoomCode}/Lobby`)

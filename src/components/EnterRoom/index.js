@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.css'
 import { Button, TextField } from '@material-ui/core'
 import db from '../../firebase'
@@ -11,12 +11,17 @@ function EnterRoom() {
   const history = useHistory()
   const [{ user }] = useStateValue();
 
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false) // toggle input for joining room
   const [roomCode, setRoomCode] = useState(null)
+  const [invalidCode, setInvalidCode] = useState(null)
+
+  useEffect(() => {
+    // clear invalid room code when text field input changes
+    setInvalidCode(false)
+  }, [roomCode])
 
   const createRoom = () => {
     // create a new room with a randomized 5 length string room code and reroute to new room
-    console.log('createRoom')
 
     const newRoomCode = nanoid(5).toUpperCase()
     db.collection('rooms').doc(newRoomCode).set({
@@ -29,14 +34,23 @@ function EnterRoom() {
   }
   
   const joinRoom = () => {
-    console.log('joinRoom')
+    // redirect to room if room exist
+    db.collection('rooms').doc(roomCode)
+      .get().then((doc) => {
+        if (doc.exists) {
+          history.push(`/${roomCode}/Lobby`)
+        } else {
+          setInvalidCode(true)
+        }
+      })
   }
 
   return toggle ? (
     <div className='enterRoom'>
-      <TextField 
+      <TextField
+        error={invalidCode}
         autoFocus
-        label='Room Code' 
+        label={invalidCode ? 'Room does not exist' : 'Room Code'}
         variant='filled' 
         size='small' 
         value={roomCode}

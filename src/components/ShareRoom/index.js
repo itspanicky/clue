@@ -21,7 +21,7 @@ function ShareRoom({ link, roomCode }) {
   return (
     <div className='shareRoom'>
 
-      <Grid container spacing={1} justify="flex-end" alignItems="center">
+      <Grid container spacing={1} justify='flex-end' alignItems='center'>
         <Grid item>
           <TextField
             variant='outlined'
@@ -42,7 +42,7 @@ function ShareRoom({ link, roomCode }) {
         <Grid item xs={0.5}>
           <Clipboard
             data-clipboard-text={link}
-            style={{ border: "none", background: "none" }}
+            style={{ border: 'none', background: 'none' }}
           >
             <Fab 
               size='small'

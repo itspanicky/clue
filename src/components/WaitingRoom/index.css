@@ -1,0 +1,29 @@
+.waitingRoom {
+  height: 100%;
+  width: 30vw;
+  padding: 10px;
+}
+
+.waitingRoom__container {
+  overflow: scroll;
+  height: 500px;
+}
+
+.waitingRoom__title {
+  text-align: center;
+  text-decoration: underline;
+  padding-bottom: 10px;
+}
+
+.waitingRoom__user {
+  color: var(--green);
+}
+
+.waitingRoom__player {
+  color: var(--black);
+}
+
+.waitingRoom__playerCount {
+  text-align: center;
+  font-size: 12px;
+}

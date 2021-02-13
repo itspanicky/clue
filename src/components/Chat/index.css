@@ -1,0 +1,14 @@
+.chat {
+  height: 400px;
+  width: 100%;
+  padding: 7px 5px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.chat__container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

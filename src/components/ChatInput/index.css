@@ -9,7 +9,7 @@
 }
 
 .chatInput > form > input {
-  width: 60vw;
+  width: 100%;
   border: 1px solid gray;
   border-radius: 3px;
   padding: 20px;

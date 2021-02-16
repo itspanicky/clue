@@ -26,6 +26,7 @@ function ChatInput({ roomCode }) {
     <div className="chatInput">
       <form>
         <input
+          autoFocus
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Say Something"

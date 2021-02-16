@@ -11,7 +11,7 @@ function Chat({ roomCode, players }) {
       const roomRef = db.collection("rooms").doc(roomCode);
       roomRef
         .collection("messages")
-        .orderBy("timestamp", "asc")
+        .orderBy("timestamp", "desc")
         .onSnapshot((snapshot) =>
           setMessages(snapshot.docs.map((doc) => doc.data()))
         );

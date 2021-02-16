@@ -19,8 +19,12 @@
   padding: 10px;
 }
 
-.lobby__shareSection {
+.lobby__footer {
   position: fixed;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

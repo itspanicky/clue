@@ -7,6 +7,7 @@ import Nickname from "../../components/Nickname";
 import WaitingRoom from "../../components/WaitingRoom";
 import Chat from "../../components/Chat";
 import ChatInput from "../../components/ChatInput";
+import StartGame from "../../components/StartGame";
 import { useStateValue } from "../../StateProvider";
 import { Divider } from "@material-ui/core";
 
@@ -93,7 +94,8 @@ function Lobby() {
           )}
         </div>
       </div>
-      <div className="lobby__shareSection">
+      <div className="lobby__footer">
+        <StartGame />
         <ShareRoom roomCode={roomCode} link={document.URL} />
       </div>
     </div>

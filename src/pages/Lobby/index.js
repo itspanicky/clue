@@ -13,16 +13,18 @@ import { Divider } from "@material-ui/core";
 function Lobby() {
   const { roomCode } = useParams();
   const [{ user }] = useStateValue();
-
+  const [host, setHost] = useState(null);
   const [players, setPlayers] = useState([]);
   const [error, setError] = useState(false);
+  const [toggleNickname, setToggleNickname] = useState(false);
+
+  const player = players.find((player) => player.id === user); // isNull when you have not joined waiting room
 
   useEffect(() => {
     if (roomCode) {
-      const roomRef = db.collection("rooms").doc(roomCode);
-
       // Grab room
-      roomRef.onSnapshot((snapshot) => console.log(snapshot.data()));
+      const roomRef = db.collection("rooms").doc(roomCode);
+      roomRef.onSnapshot((snapshot) => setHost(snapshot.data().host));
 
       // Grab players in room
       roomRef
@@ -41,7 +43,7 @@ function Lobby() {
       setError(true);
     } else {
       setError(false);
-
+      setToggleNickname(false);
       db.collection("rooms").doc(roomCode).collection("players").doc(user).set({
         id: user,
         nickname: name,
@@ -50,20 +52,45 @@ function Lobby() {
     }
   };
 
+  const removePlayer = (playerId) => {
+    db.collection("rooms")
+      .doc(roomCode)
+      .collection("players")
+      .doc(playerId)
+      .delete()
+      .then(() => {
+        console.log("Document successfully deleted!");
+      })
+      .catch((error) => {
+        console.error("Error removing document: ", error);
+      });
+  };
+
   return (
     <div className="lobby">
       <p>LOBBY</p>
       <div className="lobby__container">
-        <WaitingRoom user={user} players={players} />
+        <WaitingRoom
+          user={user}
+          host={host}
+          players={players}
+          setToggleNickname={setToggleNickname}
+          removePlayer={removePlayer}
+        />
         <Divider orientation="vertical" />
         <div className="lobby__subContainer">
-          <Nickname
-            nickname={players.find((player) => player.id === user)?.nickname}
-            changeNickname={changeNickname}
-            error={error}
-          />
-          <Chat roomCode={roomCode} players={players} />
-          <ChatInput roomCode={roomCode} user={user} />
+          {!player || toggleNickname ? (
+            <Nickname
+              nickname={player?.nickname}
+              changeNickname={changeNickname}
+              error={error}
+            />
+          ) : (
+            <>
+              <Chat roomCode={roomCode} players={players} />
+              <ChatInput roomCode={roomCode} user={user} />
+            </>
+          )}
         </div>
       </div>
       <div className="lobby__shareSection">

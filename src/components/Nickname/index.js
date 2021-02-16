@@ -26,6 +26,7 @@ function Nickname({ nickname, changeNickname, error }) {
               value={name}
               onChange={({ target: { value } }) => setName(value)}
               inputProps={{
+                maxLength: 15,
                 style: { background: "#f8f8f8" },
               }}
             />

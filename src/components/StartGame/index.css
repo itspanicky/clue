@@ -1,0 +1,9 @@
+.startGame {
+  margin-left: 10px;
+}
+
+.startGame > button {
+  text-transform: inherit !important;
+  background-color: var(--green) !important;
+  color: var(--white);
+}

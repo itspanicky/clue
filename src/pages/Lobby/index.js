@@ -95,7 +95,7 @@ function Lobby() {
         </div>
       </div>
       <div className="lobby__footer">
-        <StartGame />
+        <StartGame roomCode={roomCode} players={players} />
         <ShareRoom roomCode={roomCode} link={document.URL} />
       </div>
     </div>

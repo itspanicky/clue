@@ -4,8 +4,11 @@ import { Button } from "@material-ui/core";
 import db from "../../firebase";
 import shuffle from "../../services/shuffle";
 import { generateOmens, generateBoard } from "../../lib/index";
+import { useHistory } from "react-router-dom";
 
 function StartGame({ roomCode, players }) {
+  const history = useHistory();
+
   const startGame = () => {
     console.log("Start Game");
 
@@ -47,7 +50,8 @@ function StartGame({ roomCode, players }) {
       turn: 0,
     });
 
-    // TODO: redirect route to "/game"
+    // redirect route to "/game"
+    history.push(`/${roomCode}/game`);
   };
 
   return (

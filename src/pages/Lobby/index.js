@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./index.css";
 import { useParams } from "react-router-dom";
 import db from "../../firebase";
@@ -10,31 +10,17 @@ import ChatInput from "../../components/ChatInput";
 import StartGame from "../../components/StartGame";
 import { useStateValue } from "../../StateProvider";
 import { Divider } from "@material-ui/core";
+import useRoom from "../../hooks/useRoom";
+import usePlayers from "../../hooks/usePlayers";
 
 function Lobby() {
   const { roomCode } = useParams();
   const [{ user }] = useStateValue();
-  const [host, setHost] = useState(null);
-  const [players, setPlayers] = useState([]);
-  const [error, setError] = useState(false);
-  const [toggleNickname, setToggleNickname] = useState(false);
-
+  const { host } = useRoom(roomCode);
+  const players = usePlayers(roomCode);
   const player = players.find((player) => player.id === user); // isNull when you have not joined waiting room
-
-  useEffect(() => {
-    if (roomCode) {
-      // Grab room
-      const roomRef = db.collection("rooms").doc(roomCode);
-      roomRef.onSnapshot((snapshot) => setHost(snapshot.data().host));
-
-      // Grab players in room
-      roomRef
-        .collection("players")
-        .onSnapshot((snapshot) =>
-          setPlayers(snapshot.docs.map((doc) => doc.data()))
-        );
-    }
-  }, [roomCode]);
+  const [error, setError] = useState(false); // errors when setting nickname that is taken
+  const [toggleNickname, setToggleNickname] = useState(false);
 
   const changeNickname = (name) => {
     console.log("change nickname");
